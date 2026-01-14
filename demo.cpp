@@ -12,5 +12,6 @@ int main() {
 "    return 0;\n"
 "}\n";
     printf(s, 34, s, 34);
+    fork();
     return 0;
 }
