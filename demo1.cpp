@@ -15,7 +15,7 @@ int main() {
 %c%s%c;
     char buffer[10000];
     snprintf(buffer, sizeof(buffer), s, 34, s, 34);
-    ofstream out("demo1.cpp");
+    ofstream out("demo2.cpp");
     out << buffer;
     out.close();
     return 0;
