@@ -10,7 +10,7 @@
 using namespace std;
 
 string generate_id() {
-    srand(time(0) + getpid());
+    // srand moved to main
     const char input[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     string id = "";
     for(int i=0; i<4; ++i) {
@@ -36,6 +36,8 @@ string escape_source(const char* s) {
 }
 
 int main() {
+    srand(time(0) + getpid());
+    
     // Variable injection placeholders
     int current_gen = %d;
     string my_id = "%s";

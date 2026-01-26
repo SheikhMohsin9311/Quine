@@ -10,7 +10,7 @@
 using namespace std;
 
 string generate_id() {
-    srand(time(0) + getpid());
+    // srand moved to main
     const char input[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     string id = "";
     for(int i=0; i<4; ++i) {
@@ -36,6 +36,8 @@ string escape_source(const char* s) {
 }
 
 int main() {
+    srand(time(0) + getpid());
+    
     // Variable injection placeholders
     int current_gen = 0;
     string my_id = "SEED";
@@ -58,11 +60,11 @@ int main() {
 "using namespace std;\n"
 "\n"
 "string generate_id() {\n"
-"    srand(time(0) + getpid());\n"
+"    // srand moved to main\n"
 "    const char input[] = \"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ\";\n"
 "    string id = \"\";\n"
 "    for(int i=0; i<4; ++i) {\n"
-"        id += input[rand() % (sizeof(input) - 1)];\n"
+"        id += input[rand() %% (sizeof(input) - 1)];\n"
 "    }\n"
 "    return id;\n"
 "}\n"
@@ -84,6 +86,8 @@ int main() {
 "}\n"
 "\n"
 "int main() {\n"
+"    srand(time(0) + getpid());\n"
+"    \n"
 "    // Variable injection placeholders\n"
 "    int current_gen = %d;\n"
 "    string my_id = \"%s\";\n"

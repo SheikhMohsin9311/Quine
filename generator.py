@@ -9,7 +9,15 @@ def main():
     escaped = content.replace("\\", "\\\\")
     # 2. Escape quotes
     escaped = escaped.replace("\"", "\\\"")
-    # 3. Add newlines and quotes for C-style string concatenation
+    # 3. Escape percent signs (for fprintf safety)
+    escaped = escaped.replace("%", "%%")
+    # 4. Restore the specific placeholders we need
+    # We expect these specific sequences in the template
+    escaped = escaped.replace("%%d", "%d")
+    escaped = escaped.replace("%%s", "%s")
+    escaped = escaped.replace("%%c", "%c")
+    
+    # 5. Add newlines and quotes for C-style string concatenation
     lines = escaped.split('\n')
     c_string_lines = ['"' + line + '\\n"' for line in lines]
     c_string = '\n'.join(c_string_lines)
