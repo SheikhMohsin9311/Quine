@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Quine Genealogy Viewer</title>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style type="text/css">
+        #mynetwork {
+            width: 100%;
+            height: 800px;
+            border: 1px solid lightgray;
+        }
+
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Quine Family Tree 🌳</h1>
+    <p>Visualizing the self-replicating process.</p>
+    <div id="mynetwork"></div>
+
+    <script type="text/javascript">
+        // Placeholder for DOT content
+        // We will need to paste the content of genealogy.dot here
+        var DOTstring = `
+digraph FamilyTree {
+    node [shape=box, style=filled, color="#007acc", fontcolor=white];
+    SEED [label="SEED (Gen 0)", fillcolor="#ff6b6b"];
+    "SEED" -> "RLC0";
+    "RLC0" [label="ID: RLC0\\nGen: 1"];
+    "SEED" -> "F8CI";
+    "F8CI" [label="ID: F8CI\\nGen: 1"];
+    "RLC0" -> "WY1Z";
+    "WY1Z" [label="ID: WY1Z\\nGen: 2"];
+    "F8CI" -> "QXS8";
+    "QXS8" [label="ID: QXS8\\nGen: 2"];
+    "F8CI" -> "0NYV";
+    "0NYV" [label="ID: 0NYV\\nGen: 2"];
+    "RLC0" -> "6QMB";
+    "6QMB" [label="ID: 6QMB\\nGen: 2"];
+    "6QMB" -> "ASOZ";
+    "ASOZ" [label="ID: ASOZ\\nGen: 3"];
+    "0NYV" -> "DXLP";
+    "DXLP" [label="ID: DXLP\\nGen: 3"];
+    "6QMB" -> "4FI0";
+    "4FI0" [label="ID: 4FI0\\nGen: 3"];
+    "WY1Z" -> "TSES";
+    "TSES" [label="ID: TSES\\nGen: 3"];
+    "QXS8" -> "NA3C";
+    "NA3C" [label="ID: NA3C\\nGen: 3"];
+    "QXS8" -> "TDFF";
+    "TDFF" [label="ID: TDFF\\nGen: 3"];
+    "WY1Z" -> "6X8P";
+    "6X8P" [label="ID: 6X8P\\nGen: 3"];
+    "0NYV" -> "377K";
+    "377K" [label="ID: 377K\\nGen: 3"];
+    "TDFF" -> "FR2D";
+    "FR2D" [label="ID: FR2D\\nGen: 4"];
+    "DXLP" -> "0OJJ";
+    "0OJJ" [label="ID: 0OJJ\\nGen: 4"];
+    "TSES" -> "SUDM";
+    "SUDM" [label="ID: SUDM\\nGen: 4"];
+    "ASOZ" -> "H7HR";
+    "H7HR" [label="ID: H7HR\\nGen: 4"];
+    "DXLP" -> "4V9F";
+    "4V9F" [label="ID: 4V9F\\nGen: 4"];
+    "4FI0" -> "01IP";
+    "01IP" [label="ID: 01IP\\nGen: 4"];
+    "NA3C" -> "QTHW";
+    "QTHW" [label="ID: QTHW\\nGen: 4"];
+    "ASOZ" -> "GUL0";
+    "GUL0" [label="ID: GUL0\\nGen: 4"];
+    "377K" -> "YS3X";
+    "YS3X" [label="ID: YS3X\\nGen: 4"];
+    "TDFF" -> "ED8V";
+    "ED8V" [label="ID: ED8V\\nGen: 4"];
+    "TSES" -> "VXYZ";
+    "VXYZ" [label="ID: VXYZ\\nGen: 4"];
+    "NA3C" -> "OOIE";
+    "OOIE" [label="ID: OOIE\\nGen: 4"];
+    "377K" -> "0GIA";
+    "0GIA" [label="ID: 0GIA\\nGen: 4"];
+    "4FI0" -> "L5VN";
+    "L5VN" [label="ID: L5VN\\nGen: 4"];
+    "6X8P" -> "JSPE";
+    "JSPE" [label="ID: JSPE\\nGen: 4"];
+    "6X8P" -> "AGWX";
+    "AGWX" [label="ID: AGWX\\nGen: 4"];
+}
+`;
+
+        // Parse DOT to Vis.js (using a simple custom parser or library if needed)
+        // Vis.js supports DOT import!
+        var container = document.getElementById('mynetwork');
+        var data = {
+            dot: DOTstring
+        };
+        var options = {
+            layout: {
+                hierarchical: {
+                    direction: "UD",
+                    sortMethod: "directed"
+                }
+            },
+            physics: false
+        };
+        var network = new vis.Network(container, data, options);
+    </script>
+</body>
+
+</html>
