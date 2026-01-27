@@ -1,83 +1,61 @@
-# Quinie: A Self-Replicating Digital Organism 🧬
+# Quinie: A Self-Replicating Digital Organism 🐍
 
-![C++](https://img.shields.io/badge/Language-C++17-blue.svg)
+![Python](https://img.shields.io/badge/Language-Python-blue.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Concept](https://img.shields.io/badge/Concept-Quine%20%26%20Recursion-purple)
 
 > "To understand recursion, one must first understand recursion."
 
-**Quinie** is not just a program; it is a digital organism. It possesses the ability to reproduce, passing its own source code to its offspring while enforcing genetic constraints (generation limits) and tracking its own lineage.
+**Quinie** is a digital organism written in Python. It possesses the ability to reproduce, passing its own source code to its offspring while enforcing genetic constraints (generation limits) and tracking its own lineage.
 
-Using the concept of a **Quine** (a program that outputs its own source code), this project visualizes the "Tree of Life" of a computer program process.
+This project visualizes the "Tree of Life" of a computer process.
+
+**Note**: The original C++ version is archived in `cpp_version/`.
 
 ## 🌟 Features
 
--   **Self-Replication**: Uses robust string formatting to reconstruct its own source code dynamically.
--   **Genealogy Tracking**: Every instance knows its "Parent ID" and logs the relationship to a distributed graph database (a `.dot` file).
--   **Safety Constraints**: Implements a "Hayflick Limit" (Max Generations) to prevent infinite loops and fork bombs.
--   **Visualization**: Generates a graph that can be rendered into a beautiful family tree.
-
-## 🛠️ How It Works
-
-### The Engine
-The project uses a meta-programming approach to ensure perfect replication:
-1.  **`template.cpp`**: The blueprint of the organism. It contains the logic for survival, reproduction, and logging.
-2.  **`generator.py`**: The "Ribosome". It reads the template, properly escapes it into a C-string representation, and injects it back into the seed `quinie.cpp`.
-3.  **`quinie.cpp`**: The Seed. The first alive instance.
-
-When `quinie` runs:
-1.  **Mitosis**: It reproduces by creating 2 child source files.
-2.  **Inheritance**: It passes the *escaped* source string to the children so they can continue the cycle.
-3.  **Logging**: All instances append their nodes and edges to `genealogy.dot`.
-4.  **Execution**: Children are compiled and run in parallel/sequence.
+-   **Self-Replication**: Reads its own source code and creates executable clones.
+-   **Genealogy Tracking**: Every instance knows its "Parent ID" and logs the relationship to a distributed graph database (`genealogy.dot`).
+-   **Safety Constraints**: Implements a "Hayflick Limit" (Max Generations) to prevent infinite loops.
+-   **Visualization**: Includes both a Terminal (ASCII) and Web (HTML) visualizer.
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
--   Linux/Unix Environment
--   `g++` (GCC Compiler)
--   `graphviz` (for visualization)
--   `python3` (for building the seed)
+-   Python 3.x
 
 ### Running the Simulation
 
 ```bash
-# Build the system and run the simulation
-python3 generator.py && make run
+make run
 ```
 
 This will:
-1.  Generate the perfect seed `quinie.cpp`.
-2.  Compile the seed.
-3.  Execute the seed, spawning the colony as background processes.
-4.  Wait 10 seconds for the colony to settle.
-5.  Finalize `genealogy.dot`.
+1.  Clean up previous runs.
+2.  Execute the seed `quinie.py`.
+3.  Wait for the colony to expand.
+4.  Display the **ASCII Family Tree** in the terminal.
+5.  Generate `genealogy.dot` for web viewing.
 
 ### Visualizing the Tree 🌳
 
-If you have Graphviz installed:
+**Option 1: Terminal**
+The `make run` command automatically prints the tree at the end.
 
-```bash
-dot -Tpng genealogy.dot -o tree.png
-```
+**Option 2: Web Browser**
+Open `viewer.html` in your browser to see an interactive graph (requires `genealogy.dot` to be updated).
 
-Open `tree.png` to see the full evolutionary tree of your program!
+## 🧠 The Code
 
-## 🧠 The Code (Simplified)
+The core mechanic relies on Python's introspection:
 
-The core mechanic relies on a "Quine String" and an escape function:
-
-```cpp
-string escape_source(const char* s) {
-    // Escapes special characters to keep the cycle going
-    // ...
-}
-
-int main() {
-    const char* s = "..."; // The DNA
-    fprintf(fp, s, ..., escape_source(s).c_str(), 34);
-}
+```python
+with open(__file__, "r") as f:
+    src = f.read()
+# Inject new state
+new_src = src.replace("CURRENT_GEN = 0", "CURRENT_GEN = 1")
+# Write to new file and execute
 ```
 
 ## 📜 License

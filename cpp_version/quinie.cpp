@@ -127,7 +127,7 @@ int main() {
 "        FILE* fp = fopen(filename.c_str(), \"w\");\n"
 "        if (fp) {\n"
 "            // Write the source code.\n"
-"            // We use escape_source(s) for the %s valid C-string placeholder.\n"
+"            // Write the source code.\n"
 "            fprintf(fp, s, current_gen + 1, child_id.c_str(), my_id.c_str(), 34, escape_source(s).c_str(), 34);\n"
 "            fclose(fp);\n"
 "            \n"
@@ -167,7 +167,7 @@ int main() {
         FILE* fp = fopen(filename.c_str(), "w");
         if (fp) {
             // Write the source code.
-            // We use escape_source(s) for the %s valid C-string placeholder.
+            // Write the source code.
             fprintf(fp, s, current_gen + 1, child_id.c_str(), my_id.c_str(), 34, escape_source(s).c_str(), 34);
             fclose(fp);
             
