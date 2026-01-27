@@ -34,15 +34,17 @@ def print_tree(tree, node, prefix="", is_last=True, file=None):
     # Define symbols
     branch = "└── " if is_last else "├── "
     
-    # Content to print
-    content = f"{prefix}{branch}{node}"
+    # Content with color
+    # Note: Terminal emulators handle this, text editors might show escape codes.
+    colored_node = f"\033[92m{node}\033[0m"
+    colored_content = f"{prefix}{branch}{colored_node}"
     
     # Print to console with color
-    print(f"{prefix}{branch}\033[92m{node}\033[0m")
+    print(colored_content)
     
-    # Write to file without color if file handle provided
+    # Write to file WITH color (ANSI codes)
     if file:
-        file.write(content + "\n")
+        file.write(colored_content + "\n")
     
     # Update prefix for children
     new_prefix = prefix + ("    " if is_last else "│   ")
@@ -70,7 +72,7 @@ def main():
         
         # Special case for the root to avoid visual clutter of the first branch
         print(f"\033[91m{root}\033[0m") # Red for root
-        f.write(f"{root}\n")
+        f.write(f"\033[91m{root}\033[0m\n")
         
         if root in tree:
             children = tree[root]

@@ -1,0 +1,65 @@
+Digital Organism Genealogy
+
+SEED
+├── ZOWV
+│   ├── 976Y
+│   │   ├── LV3B
+│   │   │   ├── 23HP
+│   │   │   │   ├── IBHR
+│   │   │   │   └── 3JY3
+│   │   │   └── A9SO
+│   │   │       ├── HXG6
+│   │   │       └── I9JJ
+│   │   └── AURX
+│   │       ├── KJBM
+│   │       │   ├── TCGU
+│   │       │   └── DNTC
+│   │       └── JFBG
+│   │           ├── FEDF
+│   │           └── TSZI
+│   └── SB27
+│       ├── REKB
+│       │   ├── A3UB
+│       │   │   ├── XLMJ
+│       │   │   └── TXI4
+│       │   └── 15OR
+│       │       ├── 7RID
+│       │       └── I117
+│       └── EIDN
+│           ├── 80TT
+│           │   ├── 9C5K
+│           │   └── MRY2
+│           └── BNEY
+│               ├── LFBM
+│               └── 6Y24
+└── A5KG
+    ├── NIMS
+    │   ├── KQR8
+    │   │   ├── 66SF
+    │   │   │   ├── L991
+    │   │   │   └── 3PZO
+    │   │   └── ELC6
+    │   │       ├── 1S7V
+    │   │       └── 5XWX
+    │   └── 9BLA
+    │       ├── FK69
+    │       │   ├── WN7T
+    │       │   └── ZTOV
+    │       └── DL6S
+    │           ├── BPHN
+    │           └── G0JR
+    └── Q8RE
+        ├── DLRE
+        │   ├── NK1V
+        │   │   ├── PJP9
+        │   │   └── 5R1K
+        │   └── AXHN
+        │       ├── YO7M
+        │       └── TFDG
+        └── 0H2K
+            ├── MEUI
+            │   ├── 130G
+            │   └── 476E
+            └── WQ9V
+                ├── DWP7
+                └── CF09
