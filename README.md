@@ -46,8 +46,10 @@ The `make run` command automatically prints the tree at the end.
 **Option 2: Web Browser**
 Open `viewer.html` in your browser to see an interactive graph (requires `genealogy.dot` to be updated).
 
-**Option 3: Text File**
-The tree structure is also saved to `genealogy_tree.txt` for your records.
+**Option 3: Text Files**
+The tree structure is saved to two files:
+- `genealogy_tree.txt`: Plain text (good for editors).
+- `genealogy_tree.ansi`: Colored text (view with `cat genealogy_tree.ansi`).
 
 ## 🧠 The Code
 

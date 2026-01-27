@@ -34,17 +34,29 @@ def print_tree(tree, node, prefix="", is_last=True, file=None):
     # Define symbols
     branch = "└── " if is_last else "├── "
     
-    # Content with color
-    # Note: Terminal emulators handle this, text editors might show escape codes.
-    colored_node = f"\033[92m{node}\033[0m"
-    colored_content = f"{prefix}{branch}{colored_node}"
+def print_tree(tree, node, prefix="", is_last=True, file=None, use_color=False):
+    """
+    Recursively prints the tree in ASCII format.
+    """
+    # Define symbols
+    branch = "└── " if is_last else "├── "
     
-    # Print to console with color
-    print(colored_content)
+    # Content creation
+    if use_color:
+        node_str = f"\033[92m{node}\033[0m"
+    else:
+        node_str = node
+        
+    content = f"{prefix}{branch}{node_str}"
     
-    # Write to file WITH color (ANSI codes)
+    # Write to file if provided
     if file:
-        file.write(colored_content + "\n")
+        file.write(content + "\n")
+    else:
+        # Default to stdout (which usually wants color)
+        # Note: We ignore the file=None case used for stdout in previous version
+        # and just print.
+        print(content)
     
     # Update prefix for children
     new_prefix = prefix + ("    " if is_last else "│   ")
@@ -53,12 +65,11 @@ def print_tree(tree, node, prefix="", is_last=True, file=None):
         children = tree[node]
         count = len(children)
         for i, child in enumerate(children):
-            print_tree(tree, child, new_prefix, i == count - 1, file)
+            print_tree(tree, child, new_prefix, i == count - 1, file, use_color)
 
 def main():
     print("\n\033[1m🧬 Digital Organism Genealogy 🧬\033[0m\n")
     
-    # Assuming SEED is always the root and named "SEED"
     root = "SEED"
     tree = parse_dot("genealogy.dot")
     
@@ -66,20 +77,36 @@ def main():
         print("No genealogy data found (or tree is empty).")
         return
 
-    output_filename = "genealogy_tree.txt"
-    with open(output_filename, "w") as f:
-        f.write("Digital Organism Genealogy\n\n")
-        
-        # Special case for the root to avoid visual clutter of the first branch
-        print(f"\033[91m{root}\033[0m") # Red for root
-        f.write(f"\033[91m{root}\033[0m\n")
-        
+    # 1. Print to functionality (Stdout) - Color
+    print(f"\033[91m{root}\033[0m")
+    if root in tree:
+        children = tree[root]
+        for i, child in enumerate(children):
+            print_tree(tree, child, "", i == len(children) - 1, file=None, use_color=True)
+    print("\n")
+
+    # 2. Save Plain Text (Clean)
+    plain_filename = "genealogy_tree.txt"
+    with open(plain_filename, "w") as f:
+        f.write("Digital Organism Genealogy (Plain)\n\n")
+        f.write(f"{root}\n")
         if root in tree:
             children = tree[root]
             for i, child in enumerate(children):
-                print_tree(tree, child, "", i == len(children) - 1, f)
+                print_tree(tree, child, "", i == len(children) - 1, file=f, use_color=False)
 
-    print(f"\nExample tree saved to {output_filename}")
+    # 3. Save Colored Text (ANSI)
+    colored_filename = "genealogy_tree.ansi"
+    with open(colored_filename, "w") as f:
+        f.write("Digital Organism Genealogy (Colored)\n\n")
+        f.write(f"\033[91m{root}\033[0m\n")
+        if root in tree:
+            children = tree[root]
+            for i, child in enumerate(children):
+                print_tree(tree, child, "", i == len(children) - 1, file=f, use_color=True)
+
+    print(f"Saved plain tree to {plain_filename}")
+    print(f"Saved colored tree to {colored_filename}")
 
 if __name__ == "__main__":
     main()
