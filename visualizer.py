@@ -27,16 +27,22 @@ def parse_dot(filename):
         
     return tree
 
-def print_tree(tree, node, prefix="", is_last=True):
+def print_tree(tree, node, prefix="", is_last=True, file=None):
     """
     Recursively prints the tree in ASCII format.
     """
     # Define symbols
     branch = "└── " if is_last else "├── "
     
-    # Print current node (with color if possible)
-    # \033[92m is Green, \033[0m is Reset
+    # Content to print
+    content = f"{prefix}{branch}{node}"
+    
+    # Print to console with color
     print(f"{prefix}{branch}\033[92m{node}\033[0m")
+    
+    # Write to file without color if file handle provided
+    if file:
+        file.write(content + "\n")
     
     # Update prefix for children
     new_prefix = prefix + ("    " if is_last else "│   ")
@@ -45,7 +51,7 @@ def print_tree(tree, node, prefix="", is_last=True):
         children = tree[node]
         count = len(children)
         for i, child in enumerate(children):
-            print_tree(tree, child, new_prefix, i == count - 1)
+            print_tree(tree, child, new_prefix, i == count - 1, file)
 
 def main():
     print("\n\033[1m🧬 Digital Organism Genealogy 🧬\033[0m\n")
@@ -58,17 +64,20 @@ def main():
         print("No genealogy data found (or tree is empty).")
         return
 
-    # Check if SEED exists in the keys, or if we need to find the root dynamically
-    # But usually SEED is written first.
-    
-    # Special case for the root to avoid visual clutter of the first branch
-    print(f"\033[91m{root}\033[0m") # Red for root
-    if root in tree:
-        children = tree[root]
-        for i, child in enumerate(children):
-            print_tree(tree, child, "", i == len(children) - 1)
-    
-    print("\n")
+    output_filename = "genealogy_tree.txt"
+    with open(output_filename, "w") as f:
+        f.write("Digital Organism Genealogy\n\n")
+        
+        # Special case for the root to avoid visual clutter of the first branch
+        print(f"\033[91m{root}\033[0m") # Red for root
+        f.write(f"{root}\n")
+        
+        if root in tree:
+            children = tree[root]
+            for i, child in enumerate(children):
+                print_tree(tree, child, "", i == len(children) - 1, f)
+
+    print(f"\nExample tree saved to {output_filename}")
 
 if __name__ == "__main__":
     main()

@@ -46,6 +46,9 @@ The `make run` command automatically prints the tree at the end.
 **Option 2: Web Browser**
 Open `viewer.html` in your browser to see an interactive graph (requires `genealogy.dot` to be updated).
 
+**Option 3: Text File**
+The tree structure is also saved to `genealogy_tree.txt` for your records.
+
 ## 🧠 The Code
 
 The core mechanic relies on Python's introspection:
